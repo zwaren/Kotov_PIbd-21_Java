@@ -1,19 +1,9 @@
 import java.awt.*;
 
-public class Locomotive {
-    private int _startPosX;
-    private int _startPosY;
-
-    private int _pictureWidth;
-    private int _pictureHeight;
+public class Locomotive extends Train{
 
     private final int carWidth = 140;
     private final int carHeight = 100;
-
-    private int MaxSpeed;
-    private float Weight;
-    private Color MainColor;
-    private Color DopColor;
 
     public int getMaxSpeed() {
         return MaxSpeed;
@@ -27,24 +17,13 @@ public class Locomotive {
         return MainColor;
     }
 
-    public Color getDopColor() {
-        return DopColor;
-    }
-
-    public Locomotive(int maxSpeed, float weight, Color mainColor, Color dopColor) {
+    public Locomotive(int maxSpeed, float weight, Color mainColor) {
         MaxSpeed = maxSpeed;
         Weight = weight;
         MainColor = mainColor;
-        DopColor = dopColor;
     }
 
-    public void SetPosition(int x, int y, int width, int heigth) {
-        _startPosX = x;
-        _startPosY = y;
-        _pictureWidth = width;
-        _pictureHeight = heigth;
-    }
-
+    @Override
     public void MoveTransport(Direction direction) {
         float step = MaxSpeed * 100 / Weight;
         switch (direction) {
@@ -63,7 +42,7 @@ public class Locomotive {
         }
     }
 
-    public void DrawLocomotive(Graphics g) {
+    public void DrawTransport(Graphics g) {
         g.setColor(MainColor);
         g.fillRect(_startPosX, _startPosY + 10, 100, 30);
 

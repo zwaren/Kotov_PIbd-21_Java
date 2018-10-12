@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class FormLocomotive {
-    private Locomotive locomotive;
+    private ITransport locomotive;
 
     private JFrame frame;
     private MyPanel panel;
@@ -33,6 +33,30 @@ public class FormLocomotive {
         for_control_panel.setLayout(new BorderLayout(0,0));
         first_panel.add(for_control_panel, BorderLayout.SOUTH);
 
+        JButton upgrade_button = new JButton();
+        upgrade_button.setText("Upgrade");
+        upgrade_button.addActionListener(e -> {
+            Random rnd = new Random();
+
+            locomotive = new SteamLocomotiveWithBumper(
+                    rnd.nextInt(200) + 100,
+                    rnd.nextInt(1000) + 1000,
+                    Color.RED,
+                    Color.BLACK,
+                    true,
+                    true);
+
+            locomotive.SetPosition(
+                    rnd.nextInt(90) + 10,
+                    rnd.nextInt(90) + 10,
+                    panel.getWidth(),
+                    panel.getHeight());
+
+            panel.setLocomotive(locomotive);
+            panel.repaint();
+        });
+        create_panel.add(upgrade_button, BorderLayout.EAST);
+
         JButton create_button = new JButton();
         String create_string = "Create";
         create_button.setText(create_string);
@@ -42,8 +66,7 @@ public class FormLocomotive {
             locomotive = new Locomotive(
                     rnd.nextInt(200) + 100,
                     rnd.nextInt(1000) + 1000,
-                    Color.RED,
-                    Color.BLUE);
+                    Color.RED);
 
             locomotive.SetPosition(
                     rnd.nextInt(90) + 10,
